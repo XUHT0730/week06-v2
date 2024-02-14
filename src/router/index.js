@@ -43,6 +43,12 @@ const routes = [
       },
     ],
   },
+  // will match everything and put it under `$route.params.pathMatch`
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/NotFoundView.vue'),
+  },
 ];
 
 const router = createRouter({

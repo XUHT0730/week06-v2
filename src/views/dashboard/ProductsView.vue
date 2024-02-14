@@ -1,4 +1,5 @@
 <template>
+  <div>
     <h2>後台產品列表</h2>
     <div class="container">
             <div class="text-end mt-4">
@@ -54,7 +55,7 @@
             </table>
           <!-- 分頁元件 ( Pagination ) -->
           <!--  props => 使用 v-bind 動態綁定 pagination 變數及 getProducts 方法-->
-          <PaginationComponent :pagination="pagination" :get-Products="getProducts">
+          <PaginationComponent :pagination="pagination" :get-products="getProducts">
           </PaginationComponent>
           <!-- 分頁元件(Pagination) -->
         </div>
@@ -68,6 +69,7 @@
          :del-Product="delProduct" ref="dModal">
         </deleteModal>
         <!-- 刪除 Modal -->
+  </div>
 </template>
 
 <script>
@@ -94,19 +96,6 @@ export default {
     };
   },
   methods: {
-    // 驗證登入狀態
-    checkLogin() {
-      const checkLoginUrl = `${VITE_URL}/api/user/check`;
-      axios.post(checkLoginUrl)
-        .then(() => {
-          alert('驗證成功 歡迎光臨 ~');
-          this.getProducts();
-        })
-        .catch((err) => {
-          alert(err.response.data.message);
-          this.$router.push('/login');
-        });
-    },
     // 取得產品資料
     // 參數 page = 1 代表的是預設當前頁碼為 1，
     getProducts(page = 1) {
@@ -121,7 +110,6 @@ export default {
         })
         .catch((err) => {
           alert(err.response.data.message);
-          window.location = 'login.html';
         });
     },
     /* status 用於判斷當前點擊的是 新增/編輯/刪除 btn
@@ -189,17 +177,7 @@ export default {
     },
   },
   // 生命週期，在畫面完全生成之後，再來重新擷取動元素
-  mounted() {
-    // mounted 將 token 取出，並直接設定到 axios 的預設內容中，
-    // 這種寫法可以不用在每次發送請求時重複帶入 token 這段
-    // https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-    // 夾帶 token 在 header 中，只要加入一次就可以重複使用
-    // https://axios-http.com/zh/docs/config_defaults
-    axios.defaults.headers.common.Authorization = token;
-    // 觸發確認是否登入
-    this.checkLogin();
-  },
+  mounted() {},
   components: {
     // 分頁元件
     PaginationComponent,

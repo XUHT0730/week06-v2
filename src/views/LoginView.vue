@@ -1,4 +1,5 @@
 <template>
+  <div>
     <h2>登入頁面</h2>
             <div class="container">
           <div class="row justify-content-center">
@@ -24,6 +25,7 @@
             </div>
           </div>
         </div>
+  </div>
 </template>
 
 <style>
