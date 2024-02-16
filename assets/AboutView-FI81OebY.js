@@ -1,1 +1,0 @@
-import{_ as s,c as n,b as o,w as a,d as e,a as c,r,o as _}from"./index-eUi_6-wy.js";const u={},d=c("h1",null,"This is About page.",-1);function i(l,p,f,m,b,h){const t=r("RouterLink");return _(),n("div",null,[d,o(t,{to:"/"},{default:a(()=>[e("Home")]),_:1}),e(" | "),o(t,{to:"/about"},{default:a(()=>[e("About")]),_:1})])}const k=s(u,[["render",i]]);export{k as default};
