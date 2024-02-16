@@ -5,8 +5,9 @@
       <RouterLink to="/admin/products">後台產品列表</RouterLink> |
       <RouterLink to="/admin/order">訂單列表</RouterLink> |
       <RouterLink to="/">回到前台</RouterLink> |
+      <a href="#" @click.prevent="signOut">登出</a>
   </nav>
-  <RouterView></RouterView>
+  <RouterView v-if="checkSuccess"></RouterView>
   </div>
 </template>
 
@@ -15,11 +16,17 @@ import axios from 'axios';
 
 const { VITE_URL } = import.meta.env;
 export default {
+  data() {
+    return {
+      checkSuccess: false,
+    };
+  },
   methods: {
     checkLogin() {
       const url = `${VITE_URL}/api/user/check`;
       axios.post(url)
         .then(() => {
+          this.checkSuccess = true;
           alert('驗證成功 歡迎光臨 ~');
         })
         .catch((err) => {
@@ -27,6 +34,11 @@ export default {
           // 登入失敗就踢回去 login 頁面
           this.$router.push('/login');
         });
+    },
+    signOut() {
+      document.cookie = 'myToken=;expires=;';
+      alert('token 已清除');
+      this.$router.push('/login');
     },
   },
   mounted() {

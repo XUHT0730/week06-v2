@@ -177,7 +177,9 @@ export default {
     },
   },
   // 生命週期，在畫面完全生成之後，再來重新擷取動元素
-  mounted() {},
+  mounted() {
+    this.getProducts();
+  },
   components: {
     // 分頁元件
     PaginationComponent,
