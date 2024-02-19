@@ -5,7 +5,7 @@
       <RouterLink to="/admin/products">後台產品列表</RouterLink> |
       <RouterLink to="/admin/order">訂單列表</RouterLink> |
       <RouterLink to="/">回到前台</RouterLink> |
-      <a href="#" @click.prevent="signOut">登出</a>
+      <a href="#" @click.prevent="logOut">登出</a>
   </nav>
   <RouterView v-if="checkSuccess"></RouterView>
   </div>
@@ -35,10 +35,17 @@ export default {
           this.$router.push('/login');
         });
     },
-    signOut() {
-      document.cookie = 'myToken=;expires=;';
-      alert('token 已清除');
-      this.$router.push('/login');
+    logOut() {
+      const url = `${VITE_URL}/logout`;
+      axios.post(url)
+        .then((res) => {
+          document.cookie = 'myToken=;expires=;';
+          alert(res.data.message);
+          this.$router.push('/login');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {
