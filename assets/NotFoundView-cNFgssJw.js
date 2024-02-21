@@ -1,0 +1,1 @@
+import{_ as n,c as a,a as o,d as e,b as c,w as s,r,o as _}from"./index-1yHoD3nX.js";const d={},l=o("h1",null,"Not Found",-1);function u(i,f){const t=r("RouterLink");return _(),a("div",null,[l,o("p",null,[e("笑死，找不到頁面，回 "),c(t,{to:"/"},{default:s(()=>[e("首頁")]),_:1}),e(" 把 ")])])}const m=n(d,[["render",u]]);export{m as default};
