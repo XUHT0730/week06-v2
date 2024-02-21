@@ -50,7 +50,6 @@
 </style>
 
 <script>
-import axios from 'axios';
 
 const { VITE_URL } = import.meta.env;
 export default {
@@ -65,7 +64,7 @@ export default {
   methods: {
     login() {
       const apiUrl = `${VITE_URL}/admin/signin`;
-      axios.post(apiUrl, this.user)
+      this.axios.post(apiUrl, this.user)
         .then((res) => {
           const { token, expired } = res.data;
           document.cookie = `myToken=${token}; expires=${new Date(expired)}; path=/`;

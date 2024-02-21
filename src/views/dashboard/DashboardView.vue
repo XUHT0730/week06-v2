@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 const { VITE_URL } = import.meta.env;
 export default {
   data() {
@@ -24,7 +22,7 @@ export default {
   methods: {
     checkLogin() {
       const url = `${VITE_URL}/api/user/check`;
-      axios.post(url)
+      this.axios.post(url)
         .then(() => {
           this.checkSuccess = true;
           alert('驗證成功 歡迎光臨 ~');
@@ -37,7 +35,7 @@ export default {
     },
     logOut() {
       const url = `${VITE_URL}/logout`;
-      axios.post(url)
+      this.axios.post(url)
         .then((res) => {
           document.cookie = 'myToken=;expires=;path=/';
           alert(res.data.message);
@@ -53,7 +51,7 @@ export default {
       /(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/,
       '$1',
     );
-    axios.defaults.headers.common.Authorization = token;
+    this.axios.defaults.headers.common.Authorization = token;
     this.checkLogin();
   },
 };

@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import PaginationComponent from '../../components/PaginationComponent.vue';
 import MyModal from '../../components/MyModal.vue';
 import deleteModal from '../../components/deleteModal.vue';
@@ -102,7 +101,7 @@ export default {
       // products?page=${page} 是用網址參數寫法，將 page 參數帶入，取得當前頁碼
       // https://support.google.com/google-ads/answer/6277564?hl=zh-Hant
       const getProductsUrl = `${VITE_URL}/api/${VITE_PATH}/admin/products?page=${page}`;
-      axios.get(getProductsUrl)
+      this.axios.get(getProductsUrl)
         .then((res) => {
           const { products, pagination } = res.data;
           this.pagination = pagination;
@@ -150,7 +149,7 @@ export default {
         updateProductUrl = `${VITE_URL}/api/${VITE_PATH}/admin/product`;
         http = 'post';
       }
-      axios[http](updateProductUrl, { data: this.tempProduct })
+      this.axios[http](updateProductUrl, { data: this.tempProduct })
         .then((res) => {
           alert(res.data.message);
           this.getProducts(); // 取得所有產品的函式，重新取得所有產品資料，完成產品更新
@@ -164,7 +163,7 @@ export default {
     },
     delProduct() {
       const delProductUrl = `${VITE_URL}/api/${VITE_PATH}/admin/product/${this.tempProduct.id}`;
-      axios.delete(delProductUrl)
+      this.axios.delete(delProductUrl)
         .then((res) => {
           alert(res.data.message);
           // this.deleteModel.hide();
