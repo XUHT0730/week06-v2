@@ -39,7 +39,7 @@ export default {
       const url = `${VITE_URL}/logout`;
       axios.post(url)
         .then((res) => {
-          document.cookie = 'myToken=;expires=;';
+          document.cookie = 'myToken=;expires=;path=/';
           alert(res.data.message);
           this.$router.push('/login');
         })
